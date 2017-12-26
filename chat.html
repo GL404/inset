@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8' />
+	<title></title>
+</head>
+<body>
+<input type='button' value='测试' id='chatBtn'/>
+<input type='button' value='测试' class='chatBtn1'/>
+</body>
+<script type="text/javascript">
+	var ws = new WebSocket('ws://47.95.14.149:2345');
+	// var chatBtn = document.getElementById('chatBtn');
+	// chatBtn.onclick = function () {
+	// 	ws.send('你好呀');
+	// }
+
+	// 打开Socket 
+		ws.onopen = function(event) { 
+
+		  // 发送一个初始化消息
+		  ws.send('I am the client and I\'m listening!'); 
+
+		  var chatBtn = document.getElementById('chatBtn');
+				chatBtn.onclick = function () {
+					ws.send('你好呀');
+					//000000004db6621e00005638508be66a
+					//000000004db6621e00005638508be66a
+			}
+
+		  // 监听消息
+		  ws.onmessage = function(event) { 
+		    console.log('Client received a message',event.data); 
+		  }; 
+
+		  // 监听Socket的关闭
+		  ws.onclose = function(event) { 
+		    console.log('Client notified socket has closed',event); 
+		  }; 
+
+		  // 关闭Socket.... 
+		  //socket.close() 
+		};
+
+</script>
+</html>
